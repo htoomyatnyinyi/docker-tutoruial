@@ -1,0 +1,5 @@
+e_client/node_modules
+e_client/.env
+e_server/node_modules
+e_server/.env
+e_server/prisma/migrations
