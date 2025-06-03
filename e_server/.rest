@@ -1,7 +1,7 @@
-GET http://localhost:8800
-
 ###
 
+GET http://localhost:8800
+###
 GET http://localhost:8800/me
 ###
 GET http://localhost:8800/jobs
@@ -11,9 +11,9 @@ POST http://localhost:8800/jobs
 Content-Type: application/json
 
 {
-  "title": "this is  title",
-  "description": "This is  descriptions",
-  "company": "Micro Lab",
+  "title": "this is new title",
+  "description": "This is new descriptions",
+  "company": "Micro ",
   "location": "Mawlamyine",
-  "salary": "3233"
+  "salary": "3333"
 }

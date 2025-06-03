@@ -17,12 +17,16 @@ const Product: React.FC = () => {
   console.log(products, " state");
 
   return (
-    <div>
+    <div className="p-2 m-1 text-2xl flex ">
       {products.map((product: any) => (
-        <div>
+        <div key={product.id} className="p-2 m-1 border hover:shadow-xl">
           <h1>{product.title}</h1>
-          <p>{product.company}</p>
           <p>{product.description}</p>
+          <p>{product.salary}</p>
+          <p>{product.location}</p>
+          <p>{product.company}</p>
+          <p>{product.postedAt}</p>
+          <p>{product.updatedAt}</p>
         </div>
       ))}
     </div>

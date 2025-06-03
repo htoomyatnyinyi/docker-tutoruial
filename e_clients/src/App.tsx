@@ -1,5 +1,6 @@
 import React from "react";
 import Product from "./pages/Product";
+import ProductForm from "./components/ui/products/ProductForm";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         quod quas ad inventore voluptate hic aut numquam quisquam!
       </p>
       <Product />
+      <ProductForm />
     </div>
   );
 };

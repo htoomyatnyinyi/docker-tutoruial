@@ -4,11 +4,36 @@ import prisma from "./src/configs/database";
 import { PORT } from "./src/utils/secret";
 
 import meRoutes from "./src/routes/me";
+import jobRoutes from "./src/routes/job";
 
 const app = express();
 
 app.use(express.json()); // For parsing JSON request bodies
-app.use(cors());
+// app.use(cors());
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://your-production-frontend.com",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed methods
+    credentials: true, // If you need to send cookies or authorization headers across origins
+    optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on 200
+  })
+);
 
 // Basic route to check if the server is running
 app.get("/", (req, res) => {
@@ -16,39 +41,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", meRoutes);
-
-// Example: Get all jobs
-app.get("/jobs", async (req, res) => {
-  try {
-    const jobs = await prisma.job.findMany();
-    res.json(jobs);
-  } catch (error) {
-    console.error("Error fetching jobs:", error);
-    res.status(500).json({ error: "Failed to fetch jobs" });
-  }
-});
-
-// Example: Create a job (requires authentication and authorization in a real app)
-app.post("/jobs", async (req, res) => {
-  try {
-    const { title, description, company, location, salary } = req.body;
-    const newJob = await prisma.job.create({
-      data: {
-        title,
-        description,
-        company,
-        location,
-        salary,
-      },
-    });
-    res.status(201).json(newJob);
-  } catch (error) {
-    console.error("Error creating job:", error);
-    res.status(500).json({ error: "Failed to create job" });
-  }
-});
-
-// Add more routes for users, job applications, search, etc.
+app.use("/jobs", jobRoutes);
 
 const port = PORT || 8000;
 
