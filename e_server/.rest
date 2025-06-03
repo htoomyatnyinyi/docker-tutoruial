@@ -1,1 +1,19 @@
-GET http://localhost:3000
+GET http://localhost:8800
+
+###
+
+GET http://localhost:8800/me
+###
+GET http://localhost:8800/jobs
+
+###
+POST http://localhost:8800/jobs
+Content-Type: application/json
+
+{
+  "title": "this is  title",
+  "description": "This is  descriptions",
+  "company": "Micro Lab",
+  "location": "Mawlamyine",
+  "salary": "3233"
+}

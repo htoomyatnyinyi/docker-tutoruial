@@ -1,20 +1,21 @@
-// src/index.ts
 import express from "express";
-import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
+import cors from "cors";
+import prisma from "./src/configs/database";
+import { PORT } from "./src/utils/secret";
 
-dotenv.config();
+import meRoutes from "./src/routes/me";
 
 const app = express();
-const prisma = new PrismaClient();
-const port = process.env.PORT || 3000;
 
 app.use(express.json()); // For parsing JSON request bodies
+app.use(cors());
 
 // Basic route to check if the server is running
 app.get("/", (req, res) => {
   res.send("Jobseeker Backend is running!");
 });
+
+app.use("/", meRoutes);
 
 // Example: Get all jobs
 app.get("/jobs", async (req, res) => {
@@ -48,6 +49,8 @@ app.post("/jobs", async (req, res) => {
 });
 
 // Add more routes for users, job applications, search, etc.
+
+const port = PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

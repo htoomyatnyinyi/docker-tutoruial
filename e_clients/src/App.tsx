@@ -1,4 +1,5 @@
 import React from "react";
+import Product from "./pages/Product";
 
 const App: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const App: React.FC = () => {
         cumque natus, harum consequuntur optio maxime animi quae excepturi ut
         quod quas ad inventore voluptate hic aut numquam quisquam!
       </p>
+      <Product />
     </div>
   );
 };
