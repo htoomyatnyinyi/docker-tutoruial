@@ -1,21 +1,21 @@
 version: "3.8"
 services:
-  frontend:
+  e_clients:
     build:
-      context: ./frontend
+      context: ./e_clients
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=http://backend:3000
+      - VITE_API_URL=http://localhost:8800
     depends_on:
-      - backend
+      - e_server
     networks:
       - app-network
 
-  backend:
+  e_server:
     build:
-      context: ./backend
+      context: ./e_server
       dockerfile: Dockerfile
     ports:
       - "8800:8800"

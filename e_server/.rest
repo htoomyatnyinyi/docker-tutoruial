@@ -1,13 +1,12 @@
-GET http://localhost:8800
-
-###
 
 GET http://localhost:8800/me
 ###
-GET http://localhost:8800/jobs
+GET http://localhost:8800/me/data
 
 ###
-POST http://localhost:8800/jobs
+GET http://localhost:8800/job/
+###
+POST http://localhost:8800/job
 Content-Type: application/json
 
 {
