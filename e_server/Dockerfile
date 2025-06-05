@@ -16,3 +16,5 @@ EXPOSE 8800
 ENV DATABASE_URL="mysql://root:hmnn@localhost:3306/mydata"
 
 CMD [ "npm", "run", "server" ]
+
+

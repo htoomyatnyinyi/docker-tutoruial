@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 const Product: React.FC = () => {
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [data, getData] = useState([]);
 
-  // const getProduct = async () => {
-  //   const response = await fetch("http://localhost:8800/job");
-  //   // console.log(response, "h");
-  //   const dataBody = await response.json();
-  //   setProducts(dataBody);
-  // };
+  const getProduct = async () => {
+    const response = await fetch("http://localhost:8800/job");
+    // console.log(response, "h");
+    const dataBody = await response.json();
+    setProducts(dataBody);
+  };
   const getJsonData = async () => {
     const response = await fetch("http://localhost:8800/me/data");
     // console.log(response, "h");
@@ -18,11 +18,11 @@ const Product: React.FC = () => {
   };
 
   useEffect(() => {
-    // getProduct();
+    getProduct();
     getJsonData();
   }, []);
 
-  console.log(" state", data);
+  console.log(products, " state");
 
   interface DATA {
     id: number;

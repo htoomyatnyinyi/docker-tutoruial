@@ -6,9 +6,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
-    volumes:
-      - ./e_clients:/usr/app
-      - /usr/app/node_modules
     environment:
       - VITE_API_URL=http://e_server:8800 # Use service name instead of localhost
     depends_on:
@@ -22,9 +19,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8800:8800"
-    volumes:
-      - ./e_server:/usr/app
-      - /usr/app/node_modules
     environment:
       - NODE_ENV=development
       - DATABASE_URL=mysql://root:hmnn@mysql:3306/mydata # Point to MySQL service
@@ -51,3 +45,42 @@ networks:
 
 volumes:
   mysql-data:
+
+
+
+
+  
+# version: "3.8"
+# services:
+#   e_clients:
+#     build:
+#       context: ./e_clients
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5173:5173"
+#     environment:
+#       - VITE_API_URL=http://e_server:8800
+#     depends_on:
+#       - e_server
+#     networks:
+#       - app-network
+
+#   e_server:
+#     build:
+#       context: ./e_server
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8800:8800"
+#     environment:
+#       - NODE_ENV=development
+#     networks:
+#       - app-network
+
+#   prisma:
+#     build:
+#       context: ./e_server/prisma
+#       dockerfile: Dockerfile
+
+# networks:
+#   app-network:
+#     driver: bridge

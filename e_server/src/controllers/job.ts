@@ -18,6 +18,7 @@ interface GetJobsData extends CreateJobData {
 const getJobs = async (req: Request, res: Response): Promise<any> => {
   try {
     const jobs: GetJobsData[] = await prisma.job.findMany();
+    console.log("Jobs fetched successfully:", jobs);
     res.status(200).json(jobs);
   } catch (error) {
     console.error("Error fetching jobs:", error);
@@ -31,6 +32,7 @@ const createJob = async (
 ): Promise<any> => {
   try {
     const { title, description, company, location, salary } = req.body;
+    console.log("Creating job with data:", req.body);
     const newJob = await prisma.job.create({
       data: {
         title,
